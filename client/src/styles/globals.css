@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mars-bg: linear-gradient(
+          135deg,
+          #ffb347,
+          #ffcc33,
+          #ff8c66,
+          #c471ed,
+          #5f2c82
+  );
+  --mars-text: rgba(0, 0, 0, 0.88);
+  --mars-text-muted: rgba(0, 0, 0, 0.45);
+
+  --mars-surface: rgba(255, 255, 255, 0.18);
+  --mars-border: rgba(0, 0, 0, 0.10);
+
+  --mars-rust: #1a0c06;
+  --mars-rust-hover: #2e1a0a;
+
+  --mars-break: rgba(0, 0, 0, 0.18);
+  --mars-break-accent: rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  background: var(--mars-bg);
+  color: var(--mars-text);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  min-height: 100vh;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--mars-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mars-border);
+  border-radius: 3px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--mars-surface) inset;
+  -webkit-text-fill-color: var(--mars-text);
+}

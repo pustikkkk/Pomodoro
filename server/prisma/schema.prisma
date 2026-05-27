@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TemplateType {
+  short
+  standard
+  hybrid
+  deep_work
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  isVerified   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  timers       Timer[]
+  stars        Star[]
+
+  @@index([email])
+  @@index([username])
+}
+
+model Timer {
+  id          String         @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  autoRestart Boolean        @default(false)
+  blocks      TemplateType[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Star {
+  id           String       @id @default(uuid())
+  userId       String
+  templateType TemplateType
+  count        Int          @default(0)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, templateType])
+  @@index([userId])
+}
