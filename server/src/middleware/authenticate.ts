@@ -10,7 +10,7 @@ declare module '@fastify/jwt' {
   }
 }
 
-// Prehandler middleware — verifies the JWT from the 'token' cookie.
+// Pre-handler middleware — verifies the JWT from the 'token' cookie.
 // Use as { preHandler: [authenticate] } on any protected route.
 export async function authenticate(request: FastifyRequest, reply: FastifyReply) {
   try {
