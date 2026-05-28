@@ -10,6 +10,9 @@ COPY client/package.json ./client/
 RUN apk add --no-cache python3 make g++
 
 RUN npm ci
+# Ensure server/node_modules exists so the runner COPY never fails,
+# even when npm hoists all packages to the root node_modules.
+RUN mkdir -p server/node_modules
 
 COPY server/ ./server/
 COPY client/ ./client/
@@ -38,6 +41,7 @@ COPY --from=builder /app/package.json        ./package.json
 
 # Server artifacts
 COPY --from=builder /app/server/dist         ./server/dist
+COPY --from=builder /app/server/node_modules ./server/node_modules
 COPY --from=builder /app/server/package.json ./server/package.json
 COPY --from=builder /app/server/prisma       ./server/prisma
 
