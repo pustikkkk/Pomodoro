@@ -29,6 +29,9 @@ RUN cd client && npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Prisma needs libssl.so.3 at runtime to detect OpenSSL 3.x on Alpine
+RUN apk add --no-cache openssl
+
 # Root node_modules (npm workspace hoisting puts some packages here)
 COPY --from=builder /app/node_modules        ./node_modules
 COPY --from=builder /app/package.json        ./package.json
