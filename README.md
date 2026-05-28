@@ -221,7 +221,8 @@ The app is at **https://localhost:5173**. The `CLIENT_ORIGIN` in `server/.env` m
 | `server/` | `npm run build` | Compile TypeScript to `dist/` |
 | `server/` | `npm start` | Run the compiled server |
 | `server/` | `npm run db:generate` | Regenerate the Prisma client |
-| `server/` | `npm run db:migrate` | Apply pending migrations |
+| `server/` | `npm run db:migrate` | Apply pending migrations (dev only) |
+| `server/` | `npm run migrate:prod` | Apply pending migrations (production) |
 | `server/` | `npm run db:studio` | Open Prisma Studio |
 | `client/` | `npm run build` | Production build |
 | `client/` | `npm run preview` | Preview the production build locally |

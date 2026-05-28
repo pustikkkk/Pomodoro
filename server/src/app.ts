@@ -2,6 +2,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import Fastify from 'fastify'
+import staticPlugin from '@fastify/static'
 import corsPlugin from './plugins/cors.js'
 import cookiePlugin from './plugins/cookie.js'
 import jwtPlugin from './plugins/jwt.js'
@@ -47,6 +48,18 @@ export function buildApp() {
   app.register(starsRoutes, { prefix: '/api/v1/stars' })
 
   app.get('/health', async () => ({ ok: true }))
+
+  if (env.NODE_ENV === 'production') {
+    const clientDist = join(__dirname, '../../client/dist')
+    app.register(staticPlugin, { root: clientDist, wildcard: false })
+    app.setNotFoundHandler((request, reply) => {
+      if (request.url.startsWith('/api/')) {
+        reply.code(404).send({ message: 'Not Found' })
+        return
+      }
+      reply.sendFile('index.html')
+    })
+  }
 
   return app
 }
