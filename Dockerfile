@@ -15,7 +15,8 @@ COPY server/ ./server/
 COPY client/ ./client/
 
 # Regenerate Prisma client for the Linux target
-RUN cd server && node_modules/.bin/prisma generate
+# prisma is hoisted to the root node_modules by npm workspaces
+RUN node_modules/.bin/prisma generate --schema=server/prisma/schema.prisma
 
 # Compile TypeScript
 RUN cd server && npm run build
