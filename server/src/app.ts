@@ -1,7 +1,6 @@
 import fs from 'fs'
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
-import Fastify from 'fastify'
+import { join } from 'path'
+import Fastify, { type FastifyInstance } from 'fastify'
 import staticPlugin from '@fastify/static'
 import corsPlugin from './plugins/cors.js'
 import cookiePlugin from './plugins/cookie.js'
@@ -13,7 +12,7 @@ import timerRoutes from './routes/timers/index.js'
 import starsRoutes from './routes/stars/index.js'
 import { env } from './config/env.js'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+// __dirname is a native CommonJS global — no import.meta polyfill needed.
 
 // Returns TLS options for development. In production Railway terminates TLS at the edge,
 // so the app itself runs plain HTTP behind the proxy — no certs needed there.
@@ -33,7 +32,12 @@ function getTlsOptions() {
 }
 
 export function buildApp() {
-  const app = Fastify({ logger: true, https: getTlsOptions() })
+  const tlsOpts = getTlsOptions()
+  // Cast collapses FastifyInstance<HttpsServer> | FastifyInstance<HttpServer> union —
+  // both branches have identical method signatures for our usage.
+  const app = (tlsOpts
+    ? Fastify({ logger: true, https: tlsOpts })
+    : Fastify({ logger: true })) as FastifyInstance
 
   // Plugin order matters: cookie must be registered before jwt so the JWT plugin
   // can parse the 'token' cookie on incoming requests.
