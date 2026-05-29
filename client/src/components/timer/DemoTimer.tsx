@@ -24,6 +24,20 @@ export function DemoTimer() {
   const progress = 1 - remaining / phaseDuration
 
   useEffect(() => {
+    if (running) {
+      document.body.style.backgroundSize = '300% 300%'
+      document.body.style.animation = 'gradientShift 20s ease infinite'
+    } else {
+      document.body.style.backgroundSize = ''
+      document.body.style.animation = ''
+    }
+    return () => {
+      document.body.style.backgroundSize = ''
+      document.body.style.animation = ''
+    }
+  }, [running])
+
+  useEffect(() => {
     if (!running) return
 
     const loop = () => {
