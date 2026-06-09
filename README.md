@@ -5,6 +5,9 @@ A full-stack Pomodoro productivity application with customizable focus sessions,
 Built with Node.js (Fastify), React, PostgreSQL, and Redis, focusing on scalable backend architecture, secure authentication, and performant session management.
 
 ---
+## Live Demo
+
+https://pomodoro-production-6c9a.up.railway.app/
 
 ## Tech Stack
 
