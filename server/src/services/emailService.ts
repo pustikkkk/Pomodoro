@@ -1,13 +1,16 @@
-// Sends transactional email via SendGrid. API key is set once at module load time.
-import sgMail from '@sendgrid/mail'
+// Sends transactional email via Resend.
+import { Resend } from 'resend'
 import { env } from '../config/env.js'
 
-sgMail.setApiKey(env.SENDGRID_API_KEY)
+const resend = new Resend(env.RESEND_API_KEY)
 
-export async function sendVerificationCode(to: string, code: string): Promise<void> {
-  await sgMail.send({
+export async function sendVerificationCode(
+    to: string,
+    code: string
+): Promise<void> {
+  const { error } = await resend.emails.send({
     to,
-    from: env.SENDGRID_FROM_EMAIL,
+    from: env.RESEND_FROM_EMAIL,
     subject: 'Your Pomodoro verification code',
     text: `Your verification code is: ${code}\n\nIt expires in 5 minutes.`,
     html: `
@@ -16,10 +19,20 @@ export async function sendVerificationCode(to: string, code: string): Promise<vo
           <p style="font-weight: 700; font-size: 13px; letter-spacing: 4px; color: #000; margin: 0 0 32px;">POMODORO</p>
           <p style="color: #000; font-size: 15px; margin: 0 0 8px;">Your verification code</p>
           <p style="color: rgba(0,0,0,0.5); font-size: 12px; margin: 0 0 32px;">Expires in 5 minutes</p>
-          <div style="font-size: 40px; font-weight: 700; letter-spacing: 12px; color: #000; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 20px 24px; margin: 0 0 32px; display: inline-block;">${code}</div>
-          <p style="color: rgba(0,0,0,0.4); font-size: 11px; margin: 0;">If you didn't request this, you can safely ignore this email.</p>
+
+          <div style="font-size: 40px; font-weight: 700; letter-spacing: 12px; color: #000; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 20px 24px; margin: 0 0 32px; display: inline-block;">
+            ${code}
+          </div>
+
+          <p style="color: rgba(0,0,0,0.4); font-size: 11px; margin: 0;">
+            If you didn't request this, you can safely ignore this email.
+          </p>
         </div>
       </div>
     `,
   })
+
+  if (error) {
+    throw new Error(`Failed to send verification email: ${error.message}`)
+  }
 }
