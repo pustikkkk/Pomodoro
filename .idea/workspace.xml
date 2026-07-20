@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42acb51e-3953-4d79-9fce-da7814d9c50d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/emailService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/emailService.ts" afterDir="false" />
+    <list default="true" id="42acb51e-3953-4d79-9fce-da7814d9c50d" name="Changes" comment="fixed email provider">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/config/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/config/env.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,11 +74,24 @@
       <workItem from="1779712530840" duration="775000" />
       <workItem from="1779824338380" duration="8654000" />
       <workItem from="1779906712580" duration="9307000" />
-      <workItem from="1784574732549" duration="38000" />
+      <workItem from="1784574732549" duration="254000" />
     </task>
+    <task id="LOCAL-00001" summary="fixed email provider">
+      <option name="closed" value="true" />
+      <created>1784574787593</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1784574787593</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed email provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed email provider" />
   </component>
 </project>

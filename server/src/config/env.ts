@@ -8,8 +8,8 @@ const envSchema = z.object({
   REDIS_URL: z.string().min(1),
   // Minimum 32 chars enforces a secret long enough to resist brute-force against HMAC-SHA256.
   JWT_SECRET: z.string().min(32),
-  SENDGRID_API_KEY: z.string().min(1),
-  SENDGRID_FROM_EMAIL: z.string().email(),
+  RESEND_API_KEY: z.string().min(1),
+  RESEND_FROM_EMAIL: z.string().min(1),
   CLIENT_ORIGIN: z.string().url(),
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
