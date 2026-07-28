@@ -7,7 +7,7 @@ Built with Node.js (Fastify), React, PostgreSQL, and Redis, focusing on scalable
 ---
 ## Live Demo
 
-https://pomodoro-production-6c9a.up.railway.app/
+pomodoro.pustikkkk.me
 
 ## Tech Stack
 
