@@ -7,7 +7,7 @@ Built with Node.js (Fastify), React, PostgreSQL, and Redis, focusing on scalable
 ---
 ## Live Demo
 
-pomodoro.pustikkkk.me
+https://pomodoro.pustikkkk.me
 
 ## Tech Stack
 
